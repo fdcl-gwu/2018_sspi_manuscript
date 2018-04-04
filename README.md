@@ -17,7 +17,7 @@
 
 ## 2018 SSPI manuscript
 
-This is the manuscript for my submission to the 2017 SSPI competition. 
+This is the manuscript for my submission to the 2018 SSPI competition. 
 
 ## License
 
