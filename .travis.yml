@@ -1,0 +1,24 @@
+sudo: false
+language: generic
+matrix:
+  include:
+  - os: linux
+cache:
+  directories:
+  - "/tmp/texlive"
+  - "$HOME/.texlive"
+  timeout: 3600
+before_install:
+- travis_wait 45 bash ./utilities/travis_setup.sh
+- export PATH="/tmp/texlive/bin/x86_64-linux:$PATH"
+script:
+- latexmk -pdf -interaction=nonstopmode -halt-on-error abstract.tex
+after_success: 
+deploy:
+  provider: releases
+  api_key:
+    secure: BgXWwS39PW7a1S5RzOjDOHRk1WL8NTkrX7WEVuKBooKqWabzwWfhiIhWmB+ruhtvlE0/aJtWV7kXEDVaz9rGvBiRC6DI5rK3JZYcPG6wVy2IEH8BGSyeoM3O8YaAQTsuA0/2t8VLfBgz/W08I4vA4mf0HAQY0As/3kEYh2mt46VoU3/gVLhL4QqCyDF55wGJotq5UtaIiLD/FpSVnarDIt0+qRBkUWPDR6WcS7OFkg7naswE2ydD+QWgi8A3PyA8vziI8a/xOyGITF9ThkrOPUse/+aGjRodbMVwvC4YN/VtpQllQC5baRgbWXcfHD1KV15ynjtNFi+FgvF3crcrk/WNvKhW/P+V3OEcrnEPsYxLJ32cx1ZZiwEl50dy4nW7bzHU2fL7WolBuA0yEiM5UmeO04NJcV1WrQbWMIQIeX7krQVXFxN6IcMg/dMEmDqVt/ujJO0UjUnsM5kqCtgCDY66Ggwu6kT9wNdUfV0tb6X5gDPEw1uXhll4S4LUkwkPqTMyhTcAjWbrkM1NDJiHA3URsXC2gC02N4Msly2h4qLEii26vg9jxPo25H+J2mHYoMfKu7iEMs+tx0r2wbR6znJF/3QTn/Uc0v1BY3uWM2vPEYQr2mahVbHmi/pXLi5BYja7q1xTVDWCmF3YVozhCZKQNG7cl1kpM6jXeHFcYbI=
+  file: manuscript.pdf
+  on:
+    repo: skulumani/2018_sspi_manuscript
+    tags: true
