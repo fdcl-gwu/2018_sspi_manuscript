@@ -131,9 +131,9 @@ Typically, spacecraft have mass concentrated in a central structure, referred to
 In addition, comparatively light-weight solar panels extend from the bus to provide electrical energy from solar radiation. 
 As a result, the distributed mass of the spacecraft is captured with the dumbbell representation.
 In this section, we briefly review the polyhedron potential model and then present the derivation of the coupled dynamics of a dumbbell spacecraft about an asteroid.
-
-In this work, we assume that the asteroid is much more massive than the spacecraft and it's motion is not affected by that of the spacecraft.
+Finally, we assume that the asteroid is much more massive than the spacecraft and it's motion is not affected by that of the spacecraft.
 This assumption allows us to treat the motion of the vehicle independently from that of the asteroid. 
+In this section we summarize the development of the polyhedron potential model and the derivation of the equations of motion of a rigid dumbbell spacecraft about an asteroid.
 
 \subsection{Polyhedron Potential Model}\label{sec:polyhedron_potential}
 
@@ -262,7 +262,58 @@ The gravitational moment on the dumbbell \( \vecbf{M}_i\) is defined as
     \vecbf{M}_i = m_i \parenth{S(R_A^T \vb{\rho}_i) R^T \deriv{U}{\vb{z}_i}}.
 \end{align}
 The control inputs to the spacecraft are defined by \( \vb{u}_f, \vb{u}_m \) which define the control force represented in the inertial frame and the control moment represented in the spacecraft frame, respectively. 
- 
+
+\section{Asteroid Shape Modeling}
+A polyhedron is a generalization of a two-dimensional polygon to three-dimensions.
+It is the region of space with a boundary defined by a surface of a finite number of polygonal faces.
+The surface of the polyhedron is composed of three types of primitive objects: zero-dimensional points called vertices, one-dimensional segments called edges, and two-dimensional polygons called faces or facets.
+Furthemore, without any loss of generality we assume each face is a convex polygon since any nonconvex face can be divided into smaller convex faces.
+A valid polyhedron in the context of asteroid shape models must satisfy several constraints.
+These constraints define the relationship between each of the types of primitives which make up the polyhedron surface.
+The primitives must intersect ``properly'', the local and global topology must be ``proper''.
+For asteroid shape model we further assume that each face is a triangular polygon. 
+Again, this does not limit generality as any polygon can be divided into a series of planar triangles.
+
+The intersection of each face must be one of the following:
+\begin{itemize}
+    \item the faces are disjoint and do not intersect, or
+    \item the faces meet at a single vertex, or
+    \item the faces share two vertices and a common edge.
+\end{itemize}
+This constraint automatically ensures that all edgeds and vertices intersect properly.
+Improper intersection would penetrating faces and faces that intersect improperly. 
+Such as an edge not extending across an entire face.
+
+The second constraint is related to the local topology around each point of the polyhedron.
+In order to be locally proper, the neighborhood about any point on the surface of the polyhedron should be homeomorphic to a two-dimensional disk.
+A neighborhood about any point on the surface is defined as an arbitrarily small subset or region of the surface which surrounds the point.
+Every point on the surface should have a neighborhood which is topologically equivalent to a two dimensional disk.
+The notion of equivalency is mathematically captured using the property of homeomorphism.
+A homemorphism between two regions is a continous stretching or bending, without tearing or cutting, from one shape to another.
+For example, it is possible to turn a circle into a square by a continuous stretching and bending of the shape.
+However, it is not possible to transform a sphere into a torus, as this would require a hole to be created in the surface of the sphere.
+The neighborhood about any point on the surface of the polyhedron should be equivalent to that of a two-dimensional disk.
+A surface where this true for all points is called a \textit{two-manifold}, of a which the surface of a polyhedron is a subset.
+
+The final constraint is related to the global structure of the surface in contrast to the local neighborhood of a point.
+The surface must be connected, closed, and bounded.
+In this sense, a connected surface is one where it is possible to travel from one point to any other point of the surface without leaving the surface. 
+As a result, this will rule out any shapes with non-connected faces, such as a cube with a hollow interior/surface.
+For example, on the outer surface of the cube it is not possible to reach a point on the interior surface. 
+Combined with an assumption that there are a finite number of faces automatically ensures a closed and bounded surface. 
+Note that these conditions do not in general rule out the possibility of holes passing completely through the object.
+For example, a torus, or a donute shape, is also considered a polyhedron.
+The key difference between a hole and a cavity is that there are no disconnected surfaces and as a result a polyhedron can have any number of such holes. 
+In practice, we tend to limit our analysis to polyhedron with no holes, or with a genus of zero.
+
+
+Summarize shape models for asteroids
+
+Talk a little about polyhedra in geometry
+
+Discuss the OBJ format and vertices and faces
+
+
 \subsection{Shape Reconstruction}
 
 We assume that the spacecraft contains an initial estimate for the shape of the asteroid.
