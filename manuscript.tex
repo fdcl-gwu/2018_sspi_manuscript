@@ -264,7 +264,21 @@ The gravitational moment on the dumbbell \( \vecbf{M}_i\) is defined as
 The control inputs to the spacecraft are defined by \( \vb{u}_f, \vb{u}_m \) which define the control force represented in the inertial frame and the control moment represented in the spacecraft frame, respectively. 
 
 \section{Asteroid Shape Modeling}
-A polyhedron is a generalization of a two-dimensional polygon to three-dimensions.
+
+Asteroids can have a wide variety of shapes, and most are vastly different than that of a sphere or ellipsoid.
+\Cref{fig:irregular_asteroids} shows two examples of small solar system bodies that have highly irregular shapes.
+As a result of these highly variable shapes, an adaptable format is required to represent the wide variety of surface shapes and features.
+\begin{figure}[h]
+    \centering
+    \subcaptionbox{Asteroid Itokawa\label{fig:itokawa}}{\includegraphics[height=0.3\textheight,width=0.5\textwidth, keepaspectratio]{figures/eso1405b.jpg}}~
+    \subcaptionbox{Comet 67/Churyumov-Gerasimenko\label{fig:67p}}{\includegraphics[height=0.3\textheight,width=0.5\textwidth,keepaspectratio]{figures/comet67pcgin.jpg}}
+    \caption{Examples of the non-ellipsoidal shapes of small solar system bodies. Both asteroids and comets will tend to have vastly irregular shapes due to their low mass and violent histories of impacts and collisions~\label{fig:irregular_asteroids}}
+\end{figure}
+The scientific community describes asteroid shape using the facet-vertex model.
+This approach is an efficient representation of the more general notion of a polyhedron from geometry.
+Here we define the notion of the polyhedron and some specifics of the format used in the astrodynamics community.
+
+A polyhedron is a generalization of a two-dimensional polygon to three-dimensions~\cite{orourke1998}.
 It is the region of space with a boundary defined by a surface of a finite number of polygonal faces.
 The surface of the polyhedron is composed of three types of primitive objects: zero-dimensional points called vertices, one-dimensional segments called edges, and two-dimensional polygons called faces or facets.
 Furthemore, without any loss of generality we assume each face is a convex polygon since any nonconvex face can be divided into smaller convex faces.
@@ -306,13 +320,14 @@ For example, a torus, or a donute shape, is also considered a polyhedron.
 The key difference between a hole and a cavity is that there are no disconnected surfaces and as a result a polyhedron can have any number of such holes. 
 In practice, we tend to limit our analysis to polyhedron with no holes, or with a genus of zero.
 
-
-Summarize shape models for asteroids
-
-Talk a little about polyhedra in geometry
-
-Discuss the OBJ format and vertices and faces
-
+\subsubsection{Wavefront OBJ files}
+The OBJ format is a geometry definition file format used for a variety of computer modeling applications, and is regularly used by the asteroid community~\cite{neese2004}.
+The basic format of the file is an ASCII file where the first \( N_v\) lines begin with \texttt{v} and define the three components of a vertex in the body fixed reference frame.
+The following \( N_f\) lines begin with \texttt{f} and define the three indices of the vertices that make up the face.
+The numbering of the vertices is implicitly defined by the order listed in the file, i.e. the vertices are defined from \( 1 \) to \( N_v\).
+There are two main assumptions used by the asteroid community.
+First, each face is triangular and second, the vertices are numbered in a counterclockwise fashion about each face.
+This allows the outward facing normal to each face to be uniquely defined without any additional data.
 
 \subsection{Shape Reconstruction}
 
